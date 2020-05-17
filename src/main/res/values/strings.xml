@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="here_will_be_the_status">Here will be the status</string>
+    <string name="example_resource">R 1 C 1</string>
+</resources>
