@@ -62,14 +62,22 @@ class extraInfoActivity : AppCompatActivity() {
 
         class BaseAsyncTask : AsyncTask<String?, Void, String?>() {
             override fun doInBackground(str: Array<String?>): String? {
+                val cacheBitmap = cache.get(str[0]!!)
+
+                if (cacheBitmap != null) {
+                    val uri = bitmapToFile(cacheBitmap)
+                    return uri.toString()
+                }
+
                 val url = URL(str[0])
                 val connection: HttpURLConnection = url
                     .openConnection() as HttpURLConnection
                 connection.setDoInput(true)
                 connection.connect()
                 val input: InputStream = connection.getInputStream()
-
                 val bitmap : Bitmap = BitmapFactory.decodeStream(input)
+                cache.set(str[0]!!, bitmap)
+                asd++
                 val uri = bitmapToFile(bitmap)
 
                 return uri.toString()
@@ -95,7 +103,7 @@ class extraInfoActivity : AppCompatActivity() {
             dynamicTW.textSize = size
             dynamicTW.setBackgroundColor(Color.rgb(40, 24, 177))
             dynamicTW.setTextColor(Color.rgb(255, 199, 0))
-            dynamicTW.setPadding(5, 5, 20, 5)
+            dynamicTW.setPadding(5, 5, 20, 0)
             extraView!!.addView(dynamicTW)
         } else {
             val dynamicIW = ImageView(this)

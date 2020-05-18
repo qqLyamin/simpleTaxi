@@ -5,8 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/extraView"
     android:orientation="vertical"
+    android:background="@color/colorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:showDividers="middle"
+    android:divider="@drawable/empty_tall_divider"
     tools:context=".extraInfoActivity">
 
 </LinearLayout>

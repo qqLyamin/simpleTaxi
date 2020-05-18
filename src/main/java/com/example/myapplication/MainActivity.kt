@@ -4,8 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
-import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
 import org.json.JSONObject
@@ -26,10 +26,11 @@ fun getResponseFromURL(url: URL?) : String {
 val BASE_URL = "https://www.roxiemobile.ru/careers/test/"
 val mainUrl = URL("${BASE_URL}orders.json")
 val imageUrl = "${BASE_URL}images/"
+var asd = 0
+var cache : ExpirableCache = ExpirableCache(PerpetualCache())
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
-
     var mainList : LinearLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,23 +50,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun createButtonDynamically(text : String, extraText : String, carImage : String) {
-            val dynamicButton = Button(this, null, R.style.ButtonHOLO)
-            dynamicButton.layoutParams = LinearLayout.LayoutParams(
+            val dynamicTextView = TextView(this, null, R.style.ButtonHOLO)
+            dynamicTextView.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            dynamicButton.text = text
+            dynamicTextView.text = text
 
             val size : Float = 20f
-            dynamicButton.textSize = size
-            dynamicButton.setOnClickListener {
+            dynamicTextView.textSize = size
+            dynamicTextView.setOnClickListener {
                 openExtraInfoActivity(text, extraText, carImage)
             }
-            dynamicButton.setBackgroundColor(Color.rgb(40, 24, 177))
-            dynamicButton.setTextColor(Color.rgb(255, 199, 0))
-            dynamicButton.setPadding(5,5,20,5)
+            dynamicTextView.setBackgroundColor(Color.rgb(40, 24, 177))
+            dynamicTextView.setTextColor(Color.rgb(255, 199, 0))
+            dynamicTextView.setPadding(5,5,20,5)
 
-            mainList!!.addView(dynamicButton)
+            mainList!!.addView(dynamicTextView)
         }
 
         class BaseAsyncTask : AsyncTask<URL, Void, String?>() {
@@ -103,22 +104,22 @@ class MainActivity : AppCompatActivity() {
 
                 for (numberOfRide in 0 until rides.size) {
                     var text : String = ""
-                    text += "Адрес начала поездки : " + rides[numberOfRide].startAddressCity + "   "
+                    text += "Адрес начала поездки :         " + rides[numberOfRide].startAddressCity + "   "
                     text += rides[numberOfRide].startAddressAddress
                     text += "\n"
-                    text += "Адрес окончания поездки : " + rides[numberOfRide].endAddressCity + "   "
+                    text += "Адрес окончания поездки :  " + rides[numberOfRide].endAddressCity + "   "
                     text += rides[numberOfRide].endAddressAddress
                     text += "\n"
-                    text += "Дата поездки : " + rides[numberOfRide].orderTime.dropLast(15)
+                    text += "Дата поездки :                          " + rides[numberOfRide].orderTime.dropLast(15)
                     text += "\n"
-                    text += "Сумма к оплате : " + (rides[numberOfRide].priceRideAmount / 100 ).toString() + " " + rides[numberOfRide].priceRideCurrency + " " +
+                    text += "Сумма к оплате :                      " + (rides[numberOfRide].priceRideAmount / 100 ).toString() + " " + rides[numberOfRide].priceRideCurrency + " " +
                                                (if((rides[numberOfRide].priceRideAmount % 100 ) == 0) "00" else (rides[numberOfRide].priceRideAmount % 100 )).toString() + " КОП"
 
                     var extraText : String = ""
-                    extraText +=  "Марка Автомобиля : " + rides[numberOfRide].modelName + "\n" +
-                                  "ФИО водителя : " + rides[numberOfRide].driverName + "\n" +
-                                  "Регистрационный номер : " + rides[numberOfRide].regNumber  + "\n" +
-                                  "Время начала поездки : " + rides[numberOfRide].orderTime.dropWhile { it != 'T' }
+                    extraText +=  "Марка Автомобиля :                " + rides[numberOfRide].modelName + "\n" +
+                                  "ФИО водителя :                         " + rides[numberOfRide].driverName + "\n" +
+                                  "Регистрационный номер :     " + rides[numberOfRide].regNumber  + "\n" +
+                                  "Время начала поездки :         " + rides[numberOfRide].orderTime.dropWhile { it != 'T' }
 
 
                     var carImage : String = rides[numberOfRide].photo
