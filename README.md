@@ -27,6 +27,8 @@ This information was also received in JSON format by request
 ```sh
 https://www.roxiemobile.ru/careers/test/images/{imageName}
 ```
+Car photo images will be stored in cache for 10 min
+
 ### Development
 
   - The app supports Android 5.0+
