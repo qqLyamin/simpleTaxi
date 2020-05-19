@@ -35,7 +35,7 @@ Car photo images will be stored in cache for 10 min
   - Designed in accordance with material Design guide
   - Programming language - Kotlin 1.3+
 
-#### TODO
+### TODO
 
 I spent 17 hours developing this app, so here is a lot of things to do
 
