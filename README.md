@@ -39,6 +39,8 @@ Car photo images will be stored in cache for 10 min
 
 I spent 17 hours developing this app, so here is a lot of things to do
 
+For example:
+
   - Design (Better to use List view at the first screen)
   - 100% this code can be optimized and refactored
   - Some of the algorithms can be put in separate functions
